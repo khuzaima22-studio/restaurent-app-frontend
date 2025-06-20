@@ -45,7 +45,8 @@ export default function Dashboard() {
     served: "bg-green-100 text-green-800",
   };
 
-  if (user.role === "manager" || user.role === "admin") {
+  if (user.role === "manager" || user.role === "admin" ||
+    user.role === "branch manager") {
     const { data, isPending, isError } = useQuery({
       queryKey: ["fetchBranchesPerUserId"],
       queryFn: async () => {
