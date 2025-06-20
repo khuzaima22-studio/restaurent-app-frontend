@@ -32,8 +32,9 @@ export default function Login() {
     onSuccess(response) {
       if (response?.success) {
         Toast(response.message, true);
-        const { token, username, role, id, fullname } = response.data;
+        const { token, username, role, id, fullname,branchId } = response.data;
         localStorage.setItem("token", token);
+        localStorage.setItem("branchId", branchId);
         localStorage.setItem("username", username);
         localStorage.setItem("role", role);
         localStorage.setItem("id", id);

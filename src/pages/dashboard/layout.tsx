@@ -1,14 +1,19 @@
 import { NavLink, Outlet, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { IsToken } from "../../helper/isToken";
-import { TbBuildingCastle, TbLayoutDashboardFilled, TbLogout2, TbUsersGroup } from "react-icons/tb";
+import {
+  TbBuildingCastle,
+  TbLayoutDashboardFilled,
+  TbLogout2,
+  TbUsersGroup,
+} from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
 
 export default function Layout() {
   const router = useNavigate();
 
   const logout = () => {
-    ["token", "username", "role", "fullname", "id"].forEach((key) =>
+    ["token", "username", "role", "fullname", "id", "branchId"].forEach((key) =>
       localStorage.removeItem(key)
     );
     router("/login");
@@ -37,13 +42,13 @@ export default function Layout() {
       icon: <TbBuildingCastle className="mr-3" />,
     },
   ];
-  
+
   const [user] = useState({
-      id: localStorage.getItem("id") || "",
-      fullName: localStorage.getItem("fullname") || "",
-      userName: localStorage.getItem("username") || "",
-      role: localStorage.getItem("role") || "",
-    });
+    id: localStorage.getItem("id") || "",
+    fullName: localStorage.getItem("fullname") || "",
+    userName: localStorage.getItem("username") || "",
+    role: localStorage.getItem("role") || "",
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">

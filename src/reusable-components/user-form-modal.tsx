@@ -35,8 +35,8 @@ export default function UserFormModal({
 
   const predefinedRoles =
     userRole === "manager"
-      ? ["manager", "admin", "branch manager", "chef"]
-      : ["branch manager", "chef"];
+      ? ["manager", "admin", "branch manager", "chef", "waiter"]
+      : ["branch manager", "chef", "waiter"];
 
   const {
     register,
@@ -144,15 +144,20 @@ export default function UserFormModal({
   }, [updateData, reset]);
 
   const onSubmit = (user: User) => {
-    if (user.role === "branch manager" && !user.branchId) {
+    if (
+      (user.role === "branch manager" ||
+        user.role === "chef" ||
+        user.role === "waiter") &&
+      !user.branchId
+    ) {
       setError("branchId", {
         type: "manual",
-        message: "Select a branch for branch manager",
+        message: "Select a branch",
       });
       return;
     }
 
-    if (user.role !== "branch manager") {
+    if (user.role == "manager" || user.role == "admin") {
       delete user.branchId;
     }
 
@@ -233,14 +238,18 @@ export default function UserFormModal({
             )}
           </div>
 
-          {currentRole === "branch manager" && (
+          {(currentRole === "branch manager" ||
+            currentRole === "chef" ||
+            currentRole === "waiter") && (
             <div>
               <label className="block mb-1 font-medium">Branch</label>
               <select
                 {...register("branchId")}
                 className="w-full border px-3 py-2 rounded capitalize"
               >
-                <option value="" disabled={true}>Select Branch</option>
+                <option value="" disabled={true}>
+                  Select Branch
+                </option>
                 {branchResponse?.data?.map((branch: any) => (
                   <option key={branch.id} value={branch.id}>
                     {branch.name}

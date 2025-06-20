@@ -18,6 +18,7 @@ export const timeAgo = (dateString: string): string => {
     counter = Math.floor(counter / intervals[i][0]);
     i++;
   }
-  const label = intervals[i - 1][1];
+
+  const label = intervals[i > 0 ? i - 1 : 0][1];
   return `${counter} ${label}${counter !== 1 ? "s" : ""} ago`;
 };

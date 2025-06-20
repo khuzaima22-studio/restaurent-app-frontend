@@ -34,7 +34,11 @@ export default function LandingPage() {
             Book a Table
           </button>
           {isTableBookModal && (
-            <TableBookModal isOpen={isTableBookModal} onclose={onclose} />
+            <TableBookModal
+              isWaiter={false}
+              isOpen={isTableBookModal}
+              onclose={onclose}
+            />
           )}
         </div>
       </main>
